@@ -1,6 +1,5 @@
 // Kate Bennion
 // October 7
-// PUT THE DESCRIPTION OF WHAT THIS FILE IS DOING HERE
 (function() {
   var margin = { top: 30, left: 30, right: 150, bottom: 30},
     height = 700 - margin.top - margin.bottom,
@@ -13,17 +12,10 @@
         .append("g")
         .attr("transform", "translate(" + margin.top + "," + margin.left + ")");
 
-  // Create any scales you might need
   var xPositionScale = d3.scaleLinear().domain([1907,2015]).range([0, width]);
   var yPositionScale = d3.scaleLinear().domain([0,11000000]).range([height, 0]);
-  var colorScale = d3.scaleOrdinal().range(['#e6b800','#668cff','#b2df8a','#666666','#f9f2ec']);
+  var colorScale = d3.scaleOrdinal().range(['#e6b800','#668cff','#b2df8a','#666666']);
 
-
-//['#666666','#668cff','#b2df8a','#ccccb3','#f9f2ec']
- // #666666
-
-
-  // https://github.com/d3/d3-shape#curves
   var line = d3.area()
     .x(function(d) { return xPositionScale(d.Year); })
     .y1(function(d) { return yPositionScale(d.Recreation_Visitors); })
@@ -44,45 +36,36 @@
 
     console.log(nested);
 
-    var x = d3.scaleOrdinal()
+    /* var x = d3.scaleOrdinal()
     .domain(["1910", "1930", "1950", "1970", "1990", "2010"])
-    .range([0, width]);
+    .range([0, width]); */
 
-  svg.append("line")          // attach a line
-    .style("stroke", "black")  // colour the line
-    .attr("x1", 0)     // x position of the first end of the line
-    .attr("y1", 351)      // y position of the first end of the line
-    .attr("x2", width)     // x position of the second end of the line
+  svg.append("line")          
+    .style("stroke", "black")  
+    .attr("x1", 350)     
+    .attr("y1", 351)      
+    .attr("x2", width)     
     .attr("y2", 351)
     .attr("opacity", .50)
     .attr("stroke-width", 2);
 
-    svg.append("line")          // attach a line
-    .style("stroke", "black")  // colour the line
-    .attr("x1", 0)     // x position of the first end of the line
-    .attr("y1", 61)      // y position of the first end of the line
-    .attr("x2", width)     // x position of the second end of the line
+    svg.append("line")          
+    .style("stroke", "black")  
+    .attr("x1", 490)     
+    .attr("y1", 61)      
+    .attr("x2", width)     
     .attr("y2", 61)
     .attr("opacity", .50)
-    .attr("stroke-width", 2);  
+    .attr("stroke-width", 2); 
 
-    svg.append("text")
-    .attr("x", 60)
-    .attr("y", 345)
-    .attr("dy", 5)
-    .attr("dy", 4)
-    .text("5 million")
-    .attr("font-size", 12)
-    .attr("font-weight", "bold")
-
-    svg.append("text")
-    .attr("x", 60)
-    .attr("y", 56)
-    .attr("dy", 5)
-    .attr("dy", 4)
-    .text("10 million")
-    .attr("font-size", 12)
-    .attr("font-weight", "bold")
+    svg.append("line")          
+    .style("stroke", "black")  
+    .attr("x1", 240)     
+    .attr("y1", 580)      
+    .attr("x2", width)     
+    .attr("y2", 580)
+    .attr("opacity", .50)
+    .attr("stroke-width", 2);   
 
     // Create and style your elements
     svg.selectAll("path")
@@ -117,12 +100,47 @@
       .attr("font-weight", "bold")
 
 
+    svg.append("text")
+    .attr("x", 305)
+    .attr("y", 350)
+    .attr("dy", 5)
+    .attr("dy", 4)
+    .text("5 million")
+    .attr("font-size", 12)
+    .attr("font-style", "italic")
+
+    svg.append("text")
+    .attr("x", 439)
+    .attr("y", 59.5)
+    .attr("dy", 5)
+    .attr("dy", 4)
+    .text("10 million")
+    .attr("font-size", 12)
+    .attr("font-style", "italic")
+
+    svg.append("text")
+    .attr("x", 196)
+    .attr("y", 580)
+    .attr("dy", 5)
+    .attr("dy", 4)
+    .text("1 million")
+    .attr("font-size", 12)
+    .attr("font-style", "italic")
+
+//I had the longest fight with this x-axis to NO AVAIL so commas it is for now//
+
     var xAxis = d3.axisBottom(xPositionScale);
     svg.append("g")
       .attr("class", "axis x-axis")
       .attr("transform", "translate(0," + height + ")")
       .call(xAxis);
 
+  /*  var yAxis = d3.axisLeft(yPositionScale);
+    svg.append("g")
+      .attr("class", "axis y-axis")
+      .attr("transform", "translate(50," + 0 + ")")
+      .call(yAxis);
+*/
   }
 
 })();
