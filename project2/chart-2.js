@@ -42,7 +42,6 @@ d3.select("#country-display").style("display", "none");
     .defer(d3.csv, "country-data.csv")
     .await(ready)
 
-d3.select("#country-display").style("display", "block");
 
   function ready(error, datapoints) {
 
@@ -50,6 +49,14 @@ d3.select("#country-display").style("display", "block");
   .key(function(d) { return d.Country })
   .entries(datapoints);
 
+  svg.selectAll(".gdp-lines")
+.data(nested)
+.enter().append("path")
+.attr("d", function(d) { return line1(d.values); })
+.attr("opacity", 0)
+.attr("fill", "none")
+.attr("stroke", "green")
+;
 
 
   svg.selectAll(".country-lines")
@@ -73,6 +80,7 @@ d3.select("#country-display").style("display", "block");
         // and show the country display hover
         d3.select("#country-display").style("display", "block");
         // NOTE: #selected is inside of #country-display
+       
       })
   .on('mouseout', function(d) {
         // When you stop hovering over a circle
@@ -82,21 +90,16 @@ d3.select("#country-display").style("display", "block");
         // originally this would be .attr("fill", "black")
         d3.select(this).attr("stroke", colorScale(d.Continent)).attr("stroke-width", 1);
       })
+  .on('click', function(d) {
+    svg.select(".gdp-lines").style("display", "block");
+  })
 
     ;
 
-svg.selectAll(".gdp-lines")
-.data(nested)
-.enter().append("path")
-.attr("d", function(d) { return line1(d.values); })
-.attr("opacity", 1)
-.attr("fill", "none")
-.attr("stroke", "green")
-;
 
 
-
-d3.select("#named-select").on('change', function() {
+d3.select("#named-select")
+.on('change', function() {
   console.log("dropdown value was changed");
   console.log(this.value);
   d3.selectAll(".country-lines").attr("opacity", 0.2)
