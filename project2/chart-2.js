@@ -35,7 +35,7 @@ d3.select("#country-display").style("display", "none");
   })
   .y(function(d) {
     return GDPScale(d.GDP_per_capita);
-  })
+  });
 
 
   d3.queue()
@@ -53,6 +53,9 @@ d3.select("#country-display").style("display", "none");
 .data(nested)
 .enter().append("path")
 .attr("d", function(d) { return line1(d.values); })
+/*.attr("class", function(d) {
+        var countryClass = d.Country.toLowerCase().replace(" ", "-").replace(".", "")
+      }) */
 .attr("opacity", 0)
 .attr("fill", "none")
 .attr("stroke", "green")
@@ -71,23 +74,21 @@ d3.select("#country-display").style("display", "none");
   .attr("stroke-width", function(d) {
     return StrokeScale(d.Population);
   })
+  /*.attr("class", function(d) {
+        // if we want to select by continent later, we should add
+        // the continent as a class now
+        // be sure to 1) lowercase 2) remove the spaces 3) remove the period
+        // so N. America would become class="country-circle n-america"
+        var continentClass = d.Continent.toLowerCase().replace(" ", "-").replace(".", "")
+        var countryClass = d.Country.toLowerCase().replace(" ", "-").replace(".", "")
+      }) */
   .on('mouseover', function(d) {
-        // When you hover over a circle
-        // select that circle and make it red
-        d3.select(this).attr("stroke", "red").attr("stroke-width", 3);
-        // fill in the div with id="selected" with the country's name
-        d3.select("#selected").text(d.Country);
-        // and show the country display hover
-        d3.select("#country-display").style("display", "block");
-        // NOTE: #selected is inside of #country-display
-       
+        d3.select(this).attr("stroke", "blue").attr("stroke-width", 3);
+        d3.select("#selected").text( function (d) { return d.Country; });
+        d3.select("#country-display").style("display", "block");       
       })
   .on('mouseout', function(d) {
-        // When you stop hovering over a circle
-        // hide the country display
         d3.select("#country-display").style("display", "none");
-        // and make the circle revert to its original color
-        // originally this would be .attr("fill", "black")
         d3.select(this).attr("stroke", colorScale(d.Continent)).attr("stroke-width", 1);
       })
   .on('click', function(d) {
@@ -97,10 +98,40 @@ d3.select("#country-display").style("display", "none");
     ;
 
 
+//  d3.select("#africa-button").on('click', function(d) {
+
+      // to "zoom in", we need to pick out ONLY the asian 
+      // data points so we can get the max/min of
+      // GDP and life expectancy and change the axes
+      var asiaDatapoints = datapoints.filter(function(d) { 
+        return d.Continent == "Africa";
+      })
+
+
+
+d3.selectAll(".continent-button").on('click', function(d) {
+      // grab the element
+      // and get its data-continent attribute
+      var continent = d3.select(this).attr('data-continent');
+
+      d3.selectAll(".country-circle").attr("opacity", 0.2)
+      d3.selectAll(".country-circle")
+        .filter(function(d) {
+          // In METHOD TWO we just compared to "Asia",
+          // but here we just use the variable we took
+          // out of the HTML tag
+          return d.Continent == continent
+        })
+        .attr("opacity", 1)
+    })
+
+
+
+
 
 d3.select("#named-select")
 .on('change', function() {
-  console.log("dropdown value was changed");
+
   console.log(this.value);
   d3.selectAll(".country-lines").attr("opacity", 0.2)
   d3.selectAll(".Africa").attr("opacity", 1)
