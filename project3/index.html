@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+  <head>
+    <p><a href="..">Back to all projects</a></p>
+    <!-- The browser can use non-English-language characters (...kind of) -->
+      <meta charset="utf-8">
+      <style>
+      * {
+        font-family: "Helvetica Neue";
+      }
+      p {
+        font-size: 0.85em;
+      }
+      </style>
+  </head>
+  <body>
+  <select id="month-select">
+  <option value="all">All</option>
+  <option value="jan">January</option>
+  <option value="feb">February</option>
+  <option value="march">March</option>
+  <option value="april">April</option>
+  <option value="may">May</option>
+  <option value="june">June</option>
+  <option value="july">July</option>
+  <option value="aug">August</option>
+  <option value="sept">September</option>
+  <option value="oct">October</option>
+  <option value="nov">November</option>
+  <option value="dec">December</option>
+</select>
+ <select id="type-select">
+  <option value="all">All</option>
+  <option value="fireball">Fireball</option>
+  <option value="sphere">Sphere</option>
+  <option value="circle">Circle</option>
+  <option value="oval">Oval</option>
+  <option value="light">Light</option>
+  <option value="other">Other</option>
+  <option value="diamond">Diamond</option>
+  <option value="unknown">Unknown</option>
+  <option value="triangle">Triangle</option>
+</select>
+
+<button id="a-button">Replay</button>
+    <div id="map"></div>
+
+    <!-- This is D3, our graphing library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script>
+
+    <!-- A new library! Topojson! -->
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
+
+    <!-- Another new library! d3 hexbin -->
+    <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
+
+    <!-- Now we include our actual visualization -->
+    <script src="ufo-map.js"></script>
+  </body>
+</html>
