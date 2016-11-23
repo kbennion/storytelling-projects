@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Life Expectancy On Our Planet, Recently</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">
+
+    <style>
+    h1 {
+      font-family: "Shadows Into Light";
+      font-size: 52px;
+    }
+       #chart-2 {
+        position: relative;
+        width: 960px;
+      }
+
+       #country-display {
+        position: relative;
+        top: 50px;
+        right: 100px;
+      }
+    </style>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  </head>
+  <body>
+  <p><a href="..">Back to all projects</a></p>
+    <div class="container">
+      <h1>Life expectancy, over time</h1>
+      <h4>Click on a country to see how GDP changed as well.</h4>
+      <p>(It's by me + <a href="http://getbootstrap.com">Bootstrap</a>.)</p>
+
+      <div class="row">
+        <div class="col-md-8">
+          <div id="chart-2">
+
+
+
+  <select id="named-select">
+  <option value="Africa">Africa</option>
+  <option value="Asia">Asia</option>
+  <option value="Europe">Europe</option>
+  <option value="N-America">North America</option>
+  <option value="Oceania">Oceania</option>
+  <option value="S-America">South America</option>
+</select>
+
+  
+ <!--
+       <button id="small-button">Small countries</button>
+      <button id="no-tiny-button">No tiny countries</button>
+
+      <button id="asia-button">Asia</button>
+      <button id="oceania-button">Oceania</button>
+      <button id="africa-button">Africa (HAS ZOOM)</button>
+
+      <!-- look up "BUTTON METHOD THREE" in the css for details on this method 
+      <button class="continent-button" data-continent="N. America">North America</button>
+      <button class="continent-button" data-continent="S. America">South America</button>
+      <button class="continent-button" data-continent="Europe">Europe</button>
+
+      <div id="country-display">
+        <strong>Currently selected:</strong>
+        <span id="selected">Nothing</span>
+      </div>
+
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <h3>This is a visualization</h3>
+          <p>It is cool</p>
+          <p>It's by me + <a href="http://getbootstrap.com">Bootstrap</a></p>
+        </div>
+-->
+
+
+      </div>
+
+    </div>
+   
+       <div id="country-display">
+        <strong>Country:</strong>
+        <span id="selected">Nothing</span>
+      </div>
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script>
+
+    <script src="chart-2.js"></script>
+
+
+  </body>
+</html>
