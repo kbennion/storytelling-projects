@@ -75,8 +75,8 @@
       .data(ufos)
       .enter().append("circle")
       .attr("class", "ufo-circle")
-      .attr("r", 1)
-      .attr("fill", "#333333")
+      .attr("r", 5)
+      .attr("fill", "yellow")
       .attr("opacity", 0.7)
       .attr("cx", function(d) {
         // Taking our longitude and latitude columns
@@ -84,19 +84,25 @@
         // on our screen
         // and returning the first one (the x)
         var coords = projection([d.Longitude, d.Latitude])
-        return coords[0]
+        if (coords)
+        {return coords[0]
+        }
       })
       .attr("cy", function(d) {
         var coords = projection([d.Longitude, d.Latitude])
-        return coords[1]
+         if (coords)
+        {return coords[1]
+        }
       })
 
+/*
+My goal for this chart is an animation over time, a la
+http://www.slate.com/articles/life/the_history_of_american_slavery/2015/06/animated_interactive_of_the_history_of_the_atlantic_slave_trade.html
+(without movement, just appearing and disappearing)
+I'm still working on getting the setInterval function working -- I have the data in
+"Steps" according to days and my goal is to draw and erase each day's dots as it moves throughout the year.
 
-
-
-
-
-
+*/
 
 
   }

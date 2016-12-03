@@ -2,7 +2,7 @@
 <html>
   <head>
     <p><a href="..">Back to all projects</a></p>
-    <!-- The browser can use non-English-language characters (...kind of) -->
+    
       <meta charset="utf-8">
       <style>
       * {
@@ -11,24 +11,32 @@
       p {
         font-size: 0.85em;
       }
+
+ #description-display {
+        position: absolute;
+        top: 950px;
+        right: 100px;
+      }
+
+
       </style>
   </head>
   <body>
-  <select id="month-select">
-  <option value="all">All</option>
-  <option value="jan">January</option>
-  <option value="feb">February</option>
-  <option value="march">March</option>
-  <option value="april">April</option>
-  <option value="may">May</option>
-  <option value="june">June</option>
-  <option value="july">July</option>
-  <option value="aug">August</option>
-  <option value="sept">September</option>
-  <option value="oct">October</option>
-  <option value="nov">November</option>
-  <option value="dec">December</option>
-</select>
+  <p>There were 5000+ UFO sightings in America reported to the National UFO Reporting Center (NUFORC) last year. </a></p>
+  <div id="map"></div>
+
+<button id="a-button">Replay</button>
+
+    <div id="map"></div>
+    <div id="chart"></div>
+<button id="year-button">Year</button>
+<button id="shape-button">Shapes</button>
+<button id="map-button">Map</button>
+
+<div id="description-display">
+        <span id="selected"></span>
+      </div>
+
  <select id="type-select">
   <option value="all">All</option>
   <option value="fireball">Fireball</option>
@@ -42,9 +50,6 @@
   <option value="triangle">Triangle</option>
 </select>
 
-<button id="a-button">Replay</button>
-    <div id="map"></div>
-
     <!-- This is D3, our graphing library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script>
 
@@ -56,5 +61,6 @@
 
     <!-- Now we include our actual visualization -->
     <script src="ufo-map.js"></script>
+    <script src="ufo-chart.js"></script>
   </body>
 </html>
