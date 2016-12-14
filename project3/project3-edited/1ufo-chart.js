@@ -3,6 +3,7 @@
     height = 1000 - margin.top - margin.bottom,
     width = 1600 - margin.left - margin.right;
 
+  // What is this???
   var svg = d3.select("#chart")
         .append("svg")
         .attr("height", height + margin.top + margin.bottom)
@@ -12,14 +13,14 @@
 
   d3.queue()
     .defer(d3.json, "us.json")
-    .defer(d3.csv, "smaller_ufos.csv")
+    .defer(d3.csv, "ufos_geocoded.csv")
     .await(ready)
 
   d3.select("#country-display").style("display", "none");
 
   var projection = d3.geoAlbersUsa()
     .translate([ width / 2, height / 2 ])
-    .scale(1200)
+    .scale(850)
 
   var path = d3.geoPath()
     .projection(projection)
@@ -50,22 +51,21 @@ var simulation = d3.forceSimulation()
     .entries(ufos);
 
     var yPositionScale = d3.scalePoint()
-    .domain(d3.range(300))
+    .domain(d3.range(283))
     .range([height, 0])
 
-    // You tell it how far apart to put the circles
+     // You tell it how far apart to put the circles
     var circleSpacing = 0.5;
 
     // And it will automatically calculate a radius
     var circleRadius = (yPositionScale(0) - yPositionScale(1)) / 2 - circleSpacing;
 
-    var xPositionScale = d3.scalePoint()
+    var xPositionScale = d3.scaleOrdinal()
       .domain(grouped.map(function(d, i) {
         return '' + i;
       }))
-      .range([0, width])
-      .padding(.5);
-
+      .range([0, width]);
+    console.log(xPositionScale.domain(), xPositionScale.range());
 
     // ufos.forEach(function(d) {
     //   if (Object.keys(day_data).indexOf(d.Step) !== -1) {
@@ -108,18 +108,19 @@ var simulation = d3.forceSimulation()
       .data(grouped)
       .enter().append("g")
       .attr("class", "day_group")
-
+   
     groups.selectAll(".ufo-circle")
       .data(function(d) {
-        return d.values;
+        return d.values
       })
       .enter().append("circle")
       .attr("class", "ufo-circle")
       .attr("r", circleRadius)
-      .attr("fill", function (d) {
-        return colorScale(d.Shape);})
+      .attr("fill", function(d) {
+        return colorScale(d.Shape);
+      })
       .attr("opacity", 0.7)
-     .attr("cy", function(d, i) {
+      .attr("cy", function(d, i) {
         if (yPositionScale(i + 1)) {
           return yPositionScale(i + 1) + circleRadius;
         } else {
@@ -195,7 +196,30 @@ var simulation = d3.forceSimulation()
         .attr("r", circleRadius)
         .attr("cx", function(d) {
         // Taking our longitude and latitude columns
-        // converting them into pixel coordinates
+        // converting them into pixel coordinates 
+        // on our screen
+        // and returning the first one (the x)
+        var coords = projection([d.Longitude, d.Latitude])
+        if (coords)
+        {return coords[0]
+        }
+      })
+      .attr("cy", function(d) {
+        var coords = projection([d.Longitude, d.Latitude])
+         if (coords)
+        {return coords[1]
+        }
+      })
+      
+    })
+
+
+
+
+/*
+      .attr("cx", function(d) {
+        // Taking our longitude and latitude columns
+        // converting them into pixel coordinates 
         // on our screen
         // and returning the first one (the x)
         var coords = projection([d.Longitude, d.Latitude])
@@ -210,36 +234,18 @@ var simulation = d3.forceSimulation()
         }
       })
 
-    })
+    */
 
-
-
-
-
-      // .attr("cx", function(d) {
-        // Taking our longitude and latitude columns
-        // converting them into pixel coordinates
-        // on our screen
-        // and returning the first one (the x)
-      //   var coords = projection([d.Longitude, d.Latitude])
-      //   if (coords)
-      //   {return coords[0]
-      //   }
-      // })
-      // .attr("cy", function(d) {
-      //   var coords = projection([d.Longitude, d.Latitude])
-      //    if (coords)
-      //   {return coords[1]
-      //   }
-      // })
-
-
+    
 
 /* My goal for this chart is to arrange in line graphs, and then move into shape clusters
 and the map. Instead of a bubble circle chart, would it be possible to send them into
 shapes that are not spheres? (Such as triangle, etc?)
 
 */
+
+// https://www.dashingd3js.com/svg-paths-and-d3js
+//https://github.com/d3/d3-shape
 
 
   }
