@@ -1,14 +1,42 @@
 <!doctype html>
 <html>
   <head>
+   <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UFO Sightings in 2015</title>
     <p><a href="..">Back to all projects</a></p>
+
+    <link rel="stylesheet" href="https://bootswatch.com/cyborg/bootstrap.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
     
       <meta charset="utf-8">
       <style>
+
+*{
+      margin: 0;
+      padding: 0;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: "Space Mono";
+    }
+
+    h1 {
+      font-size: 62px;
+    }
+
+    h3 {
+      font-size: 18px;
+    color: #29e571 !important;
+    }
+
       * {
         font-family: "Helvetica Neue";
       }
       p {
+        font-family: "Helvetica Neue";
         font-size: 0.85em;
       }
 
@@ -18,11 +46,17 @@
         right: 100px;
       }
 
+      body{
+    background: black;
+}
+
 
       </style>
   </head>
   <body>
-  <p>There were 5000+ UFO sightings in America reported to the National UFO Reporting Center (NUFORC) last year. </a></p>
+  <div class="container">
+   <h1>American UFOs 2k15</h1>
+  <h3>There were 5000+ UFO sightings in America reported to the National UFO Reporting Center (NUFORC) last year. </h3>
   <div id="map"></div>
 
 <button id="a-button">Replay</button>
@@ -52,17 +86,33 @@
   <option value="triangle">Triangle</option>
 </select>
 
+<h3>By Kate. I also used <a href="http://getbootstrap.com">Bootstrap</a></h3>
+<h3>Data comes from <a href="http://www.nuforc.org/">NUFORC</a></h3>
+
     <!-- This is D3, our graphing library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script>
 
-    <!-- A new library! Topojson! -->
     <script src="https://d3js.org/topojson.v1.min.js"></script>
 
-    <!-- Another new library! d3 hexbin -->
     <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
 
-    <!-- Now we include our actual visualization -->
-    <script src="ufo-map.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script>
+
+      <script src="ufo-map.js"></script>
     <script src="ufo-chart.js"></script>
+
+
+
   </body>
 </html>
+
+
+
+
+
+
+
+  

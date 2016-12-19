@@ -32,8 +32,8 @@
       .enter().append("path")
       .attr("class", "state")
       .attr("d", path)
-      .attr("fill", "#333333")
-      .attr("stroke", "#e3e3e3")
+      .attr("fill", "black")
+      .attr("stroke", '#CC2545')
       .attr("stroke-width", 0.5)
 
     d3.select("#a-button").on('click', function() {
@@ -45,8 +45,8 @@
       .enter().append("circle")
       .attr("class", "ufo-circle")
       .attr("r", 5)
-      .attr("fill", "yellow")
-      .attr("opacity", 0.7)
+      .attr("fill", '#FDFDFD')
+      .attr("opacity", 0.9)
       .attr("cx", function(d) {
         var coords = projection([d.Longitude, d.Latitude])
         if (coords)
@@ -63,7 +63,6 @@
 var step = 1
 
 setTimeout(function() {
-
 step++;
 
 currentDatapoints = ufos.filter(function(d) { return d.Step === step });

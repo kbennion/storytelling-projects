@@ -24,12 +24,14 @@
   var path = d3.geoPath()
     .projection(projection)
 
+var xPositionScale = d3.scalePoint()
+                      .domain(['Sphere','Circle','Oval','Light','Other','Diamond','Unknown','Triangle','Fireball'])
+                      .range([0, width]);
 
 
 var lengthScale = d3.scalePoint().domain(['Sphere','Circle','Oval','Light','Other','Diamond','Unknown','Triangle','Fireball']).range([height, 0]);
 
-
-var colorScale = d3.scaleOrdinal().range(['gray', 'yellow', 'red', 'orange', 'blue', 'black', 'pink', 'green']);
+var colorScale = d3.scaleOrdinal().range(['#FDFDFD', '#FEEBB1', '#CC2545', '#EF7159', '#0382CC', '#301A5B', '#D65E85', '#2497D0']);
 
 
 
@@ -37,7 +39,7 @@ var simulation = d3.forceSimulation()
     .force("x", d3.forceX(width / 2).strength(0.05))
     .force("y", d3.forceY(height / 2).strength(0.05))
     .force("collide", d3.forceCollide(function(d) {
-      return radiusScale(d.sales) + 2
+      return circleRadius + 2
     }))
 
 
@@ -153,10 +155,7 @@ var simulation = d3.forceSimulation()
         d3.select(this).attr("fill", colorScale(d.Shape));
       })
 
-
-      d3.select("#shape-button").on('click', function() {
-        console.log('you clicked shapes')
-      simulation.force("x", d3.forceX(function(d) {
+           /*simulation.force("x", d3.forceX(function(d) {
           if(d.Shape == "Triangle") {
             return width * .25;
           }
@@ -167,6 +166,83 @@ var simulation = d3.forceSimulation()
         .strength(0.1))
         .alphaTarget(0.5)
         .restart()
+
+        */
+
+/*simulation.nodes(datapoints)
+      .on('tick', ticked)
+*/
+
+      d3.select("#shape-button").on('click', function() {
+        console.log('you clicked shapes')
+      svg.selectAll(".ufo-circle")
+        .transition()
+        .duration(750)
+        .attr("r", circleRadius)
+        .attr("cx", function(d) {
+          if(d.Shape == 'Triangle') {
+            return 100;
+          }
+          if(d.Shape == 'Fireball') {
+            return 200;
+          }
+          if(d.Shape == 'Oval') {
+            return 300;
+          }
+          if(d.Shape == 'Sphere') {
+            return 400;
+          }
+          if(d.Shape == 'Circle') {
+            return 500;
+          }
+          if(d.Shape == 'Diamond') {
+            return 600;
+          }
+          if (d.Shape == 'Other') {
+            return 700;
+          }
+          if (d.Shape == 'Light') {
+            return 800;
+          }
+          if (d.Shape == 'Unknown') {
+            return 900;
+          }
+        })
+        .attr("cy", function(d) {
+          if(d.Shape == "Triangle"||d.Shape == "Fireball"||d.Shape == "Oval") {
+            return 200;
+          }
+          else {
+            return 500;
+          }
+        })
+    })
+
+
+
+           d3.select("#map-button").on('click', function() {
+        console.log('you clicked maps')
+      svg.selectAll(".ufo-circle")
+        .transition()
+        .duration(750)
+        .attr("r", circleRadius)
+        .attr("cx", function(d) {
+        // Taking our longitude and latitude columns
+        // converting them into pixel coordinates
+        // on our screen
+        // and returning the first one (the x)
+        var coords = projection([d.Longitude, d.Latitude])
+        if (coords)
+        {return coords[0]
+        }
+      })
+      .attr("cy", function(d) {
+        var coords = projection([d.Longitude, d.Latitude])
+         if (coords)
+        {return coords[1]
+        }
+      })
+
     })
 
       /*
